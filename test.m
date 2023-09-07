@@ -4,7 +4,7 @@ clc
 dt = 0.1;
 t = 0:dt:100;
 
-robot = JointOperationsClass();
+robot = Robot();
 robot.joints = [jointClass(), jointClass(), jointClass(), jointClass()];
 
 % robot.joints(2).theta_i = 5 + 0.001*t;

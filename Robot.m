@@ -1,4 +1,4 @@
-classdef JointOperationsClass
+classdef Robot
     properties
         joints = [];
     end
