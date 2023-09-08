@@ -4,13 +4,17 @@ classdef Robot
     end
 
     methods
-        function T = getT(obj) 
-            lastJoint = length(obj.joints);
-            T = obj.joints(1).getA_i();
+        function obj = Robot(joints)
+            obj.joints = joints;
+        end
 
-            for i = 2:lastJoint
-                T = T * obj.joints(i).getA_i();
-            end
+        function T = getT(obj) 
+                lastJoint = length(obj.joints);
+                T = obj.joints(1).getA_i();
+    
+                for i = 2:lastJoint
+                    T = T * obj.joints(i).getA_i();
+                end
         end
 
         function q = getq(obj)
@@ -22,10 +26,10 @@ classdef Robot
         end
 
         function K = getK(obj) 
-            K =  obj.getT() * pinv(obj.getq());
+            K =  obj.getJacobian * obj.getq()';
         end
 
-        function J = getJ(obj)
+        function J = getJacobian(obj)
             numberOfJoints = length(obj.joints);
 
             
@@ -42,6 +46,10 @@ classdef Robot
                 J(1, i) = diff(Tx, q(i));
                 J(2, i) = diff(Ty, q(i));
                 J(3, i) = diff(Tz, q(i));
+
+                % J(1, i) = diff(Tx, 1);
+                % J(2, i) = diff(Ty, 1);
+                % J(3, i) = diff(Tz, 1);
             end
 
             J = double(J);
