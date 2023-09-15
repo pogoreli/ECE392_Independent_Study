@@ -47,9 +47,9 @@ classdef Robot
                 J(2, i) = diff(Ty, q(i));
                 J(3, i) = diff(Tz, q(i));
 
-                % J(1, i) = diff(Tx, 1);
-                % J(2, i) = diff(Ty, 1);
-                % J(3, i) = diff(Tz, 1);
+                % J(1, i) = diff(Tx, 0);
+                % J(2, i) = diff(Ty, 0);
+                % J(3, i) = diff(Tz, 0);
             end
 
             J = double(J);
